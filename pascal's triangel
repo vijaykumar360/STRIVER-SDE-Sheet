@@ -18,4 +18,37 @@ vector<vector<long long int>> printPascal(int n)
         return ans;
   // Write your code here.
 }
-my intuition:
+my intuition: lets say every row in pascals triangle is 0 indexed and every row has 1 at first and last of row except the first row which has only one 1
+lets take temperary vector or array where we build one by one row pascal triange and insert that vector to our ans matrix at last, we do  this for n times(n first pascal rows)
+what i do is:
+initially took empty array and an empty 2 dimensional vector
+->first i insert 1 to temp vector ;
+and i push every element e i.e. sum of lastvectorof matrix[j],lastvector[j-1], j>=1 andj<sizeoflastvectorofmatrix;
+then now i insert 1 at back to temp vector if matrix has atleast one vector at that time
+and clear temp vector 
+  do the same process for given n(give value ) times
+  
+  
+ before not even thinking a second about  how to reduce that extra space complexity(temp vector) i saw best solution
+ 
+ #include <bits/stdc++.h> 
+vector<vector<long long int>> printPascal(int n) 
+{
+     
+        vector<vector<long long int>> ans(n);
+        long long i=0,j=0;
+       
+        while(n--){
+            ans[i].resize(i+1);
+            ans[i][0]=ans[i][i]=1;
+            for(j=1;j<i;++j){
+                ans[i][j]=ans[i-1][j]+ans[i-1][j-1];
+            }
+            
+            ++i;
+        }
+        return ans;
+  // Write your code here.
+}
+
+  
