@@ -1,0 +1,28 @@
+#include <bits/stdc++.h> 
+int maximumProfit(vector<int> &a){
+     int buy=-1,sell=-1,pointer=-1,n=a.size(),i=0;
+        for(i=0;i<n;i++){
+            if(buy==-1)buy=i;
+            else if(sell ==-1&&a[i]<=a[buy])buy=i;
+            else if(sell==-1&&a[i]>a[buy])sell=i;
+            else if(sell!=-1&&pointer==-1&&a[i]>a[sell])sell=i;
+            else if(sell!=-1&&((pointer==-1&&a[i]<a[buy])||(pointer!=-1&&a[i]<a[pointer])))pointer=i;
+            else if(pointer!=-1&&sell!=-1&&a[i]>a[pointer]&&a[i]-a[pointer]>=a[sell]-a[buy]){
+                buy=pointer,sell=i;
+            }
+        }
+        if(sell==-1)return 0;
+        else return a[sell]-a[buy];
+    // Write your code he.
+}
+intuition:
+after looking the problem i found that it could be done in one pass time complexity( 1*O(N)),
+i also got that i am able to do 3 pointer aproach( i took much time to get solution)
+i have taken 3 variables buy(stores index at which we can buy at that time),sell(stores index so that vector[sell]-vector[buy] is max(also >0) and vector[buy]
+is minimized, if no such index found until then it stores -1), and pointer (which stores the index of element when vector[index]<vector[buy] and sell!=-1 at that time)
+running the loop along the given vector(with i as index):
+if buy =-1 just update buy =i and continue;
+else if sell ==-1 and a[i]<=a[buy] update buy with i;
+   -> that  means when we still did not get the index whose element is greater than a[buy] and found less than a[buy] we update buy to that  index;
+else if we got index whose element is greater than buy and sell ==-1; we update sell =i;
+............
