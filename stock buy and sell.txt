@@ -26,3 +26,25 @@ else if sell ==-1 and a[i]<=a[buy] update buy with i;
    -> that  means when we still did not get the index whose element is greater than a[buy] and found less than a[buy] we update buy to that  index;
 else if we got index whose element is greater than buy and sell ==-1; we update sell =i;
 ............
+
+
+
+
+optimal simple solution:
+#include<bits/stdc++.h>
+
+using namespace std;
+int maxProfit(int arr[]) {
+  int maxPro = 0;
+  int minPrice = INT_MAX;
+  for (int i = 0; i < 6; i++) {
+    minPrice = min(minPrice, arr[i]);
+    maxPro = max(maxPro, arr[i] - minPrice);
+  }
+  return maxPro;
+}
+int main() {
+  int arr[] = {7,1,5,3,6,4};
+  int maxPro = maxProfit(arr);
+  cout << "Max profit is: " << maxPro << endl;
+}
