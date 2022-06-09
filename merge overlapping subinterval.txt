@@ -1,0 +1,36 @@
+Code:
+#include <bits/stdc++.h> 
+/*
+
+    intervals[i][0] = start point of i'th interval
+    intervals[i][1] = finish point of i'th interval
+
+*/
+
+vector<vector<int>> mergeIntervals(vector<vector<int>> &a)
+{
+     sort(a.begin(),a.end());
+        vector<vector<int>> v;
+        v.push_back({a[0][0],a[0][1]});
+        for(int i=1;i<a.size();++i){
+            if(a[i][0]<=v[v.size()-1][1]){
+                if(a[i][1]>v[v.size()-1][1])v[v.size()-1][1]=a[i][1];
+            }
+            else v.push_back({a[i][0],a[i][1]});
+        }
+        return v;
+    
+    
+    // Write your code here.
+}
+
+
+
+intuition:
+first we sort intervals according to the start  time of each interval
+and then we store first interval in container
+from second interval on wards we check whether it is overlapping or not if it overlapping , we merge else push this new interval into container
+  lets see how we do this 
+  first we check whether ith interval's start time is less than or equal to end time of last   interval in container
+  if it is less than or equal we make end time of last interval of container =max(its val,end time of current interval)
+ if it is greater we just push this vector into  container
