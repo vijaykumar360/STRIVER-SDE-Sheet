@@ -1,0 +1,16 @@
+#include <bits/stdc++.h> 
+#include <vector>
+
+bool findTargetInMatrix(vector < vector < int >> & a, int m, int n, int target) {
+     int i=0;
+        while(i<a.size()){
+            if(a[i][n-1]>=target)break;
+            ++i;
+        }
+        if(i==m||a[i][0]>target)return false;
+        auto it=lower_bound(a[i].begin(),a[i].end(),target);
+        if(it==a[i].end())return false;
+        else if(*it!=target)return false;
+        else return true;
+    // Write your code here.
+}
